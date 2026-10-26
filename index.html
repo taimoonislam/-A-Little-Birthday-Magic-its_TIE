@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff5f7">
+    <meta name="description" content="A little birthday magic, made with love.">
+    <title>A Little Birthday Magic — its_TIE</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body data-theme="pink">
+
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div id="confetti-layer" aria-hidden="true"></div>
+
+    <header class="topbar">
+
+        <a class="brand" href="#section-welcome">
+            <span class="brand-heart">♡</span>
+            <span data-i18n="brand">A little birthday magic</span>
+        </a>
+
+        <div class="top-controls">
+
+            <select id="language-select" aria-label="Choose language">
+                <option value="en">English</option>
+                <option value="bn">বাংলা</option>
+                <option value="banglish">Banglish</option>
+            </select>
+
+            <button class="icon-button" id="theme-toggle" type="button" aria-label="Customize colors"
+                title="Customize colors">
+                <span id="theme-icon">✿</span>
+            </button>
+
+            <button class="icon-button" id="mode-toggle" type="button" aria-label="Switch light/dark mode"
+                title="Switch light/dark mode">
+                <span id="mode-icon">☾</span>
+            </button>
+
+            <button class="sound-button" id="sound-toggle" type="button" aria-pressed="false">
+                <span id="sound-icon">♫</span>
+                <span id="sound-label" data-i18n="soundOff">Sound off</span>
+            </button>
+
+        </div>
+
+        <div id="theme-panel" hidden>
+            <p class="theme-panel-title" data-i18n="chooseColors">
+                Choose your colors ♡
+            </p>
+
+            <label for="preset-theme" data-i18n="colorTheme">
+                Color theme
+            </label>
+
+            <select id="preset-theme">
+                <option value="pink">Birthday Pink</option>
+                <option value="lavender">Lavender Dream</option>
+                <option value="midnight">Periwinkle</option>
+                <option value="peach">Peach Glow</option>
+                <option value="custom">Custom Color</option>
+            </select>
+
+            <label for="theme-color-picker" data-i18n="ownColor">
+                Your own color
+            </label>
+
+            <input type="color" id="theme-color-picker" value="#d9658d">
+
+            <p class="theme-note" data-i18n="themeNote">
+                Choose a color to personalize your birthday page.
+            </p>
+        </div>
+
+        <div id="music-panel" hidden>
+            <label for="music-volume" data-i18n="musicVolume">
+                Music volume
+            </label>
+
+            <input id="music-volume" type="range" min="0" max="100" value="25">
+        </div>
+
+    </header>
+
+    <main class="page-container">
+
+        <!-- 1. Welcome -->
+        <section class="birthday-section active" id="section-welcome" data-section="welcome">
+
+            <div class="hero-card">
+
+                <div class="eyebrow" data-i18n="welcomeEyebrow">
+                    <span>✧</span> A SPECIAL LITTLE SURPRISE <span>✧</span>
+                </div>
+
+                <div class="hero-decoration" aria-hidden="true">
+                    <span class="floating-heart heart-one">♡</span>
+                    <span class="floating-heart heart-two">✦</span>
+                    <span class="floating-heart heart-three">♡</span>
+                    <div class="hero-cake">🎂</div>
+                </div>
+
+                <p class="script-text" data-i18n="todayAboutYou">
+                    Today is all about you
+                </p>
+
+                <h1>
+                    <span data-i18n="happyBirthday">Happy Birthday</span><span class="heading-dot">.</span>
+                </h1>
+
+                <p class="hero-description" data-i18n="heroDescription">
+                    A tiny corner of the internet, filled with love,
+                    smiles and a little birthday magic.
+                </p>
+
+                <div class="name-field">
+                    <label for="recipient-name" data-i18n="birthdayStar">
+                        Who is the birthday star?
+                    </label>
+
+                    <input id="recipient-name" type="text" placeholder="Enter their name..." maxlength="60">
+                </div>
+
+                <button class="primary-button" id="start-button" type="button">
+                    <span data-i18n="letsBegin">Let's begin</span> ♡
+                </button>
+
+                <p class="tiny-note">
+                    Made with a little extra love · its_TIE
+                </p>
+
+            </div>
+        </section>
+
+        <!-- 2. Birthday letter -->
+        <section class="birthday-section" id="section-letter" data-section="letter">
+
+            <div class="content-card">
+
+                <div class="section-icon">💌</div>
+
+                <p class="eyebrow" data-i18n="letterEyebrow">
+                    A LITTLE NOTE FOR YOU
+                </p>
+
+                <h2 id="letter-greeting" data-i18n="dearBirthdayStar">
+                    Dear Birthday Star,
+                </h2>
+
+                <div class="letter-paper">
+
+                    <p id="letter-content" data-i18n="letterContent">
+                        Today is a reminder that the world became a little
+                        brighter the day you arrived. May your days be filled
+                        with unexpected happiness, kind people, warm hugs
+                        and beautiful memories.
+                    </p>
+
+                    <label for="personal-message" data-i18n="personalMessageLabel">
+                        Add your personal message
+                    </label>
+
+                    <textarea id="personal-message" rows="4" maxlength="500"
+                        placeholder="Write something from your heart..."></textarea>
+
+                    <div class="message-meta">
+                        <span id="message-count">0 / 500</span>
+                    </div>
+
+                </div>
+
+                <div class="button-row">
+                    <button class="secondary-button" data-back type="button">
+                        ← <span data-i18n="back">Back</span>
+                    </button>
+
+                    <button class="primary-button" id="letter-next" type="button">
+                        <span data-i18n="giftAwaits">A little gift awaits</span> →
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. Gift -->
+        <section class="birthday-section" id="section-gift" data-section="gift">
+
+            <div class="content-card">
+
+                <div class="section-icon">🎁</div>
+
+                <p class="eyebrow" data-i18n="giftEyebrow">
+                    SOMETHING JUST FOR YOU
+                </p>
+
+                <h2 data-i18n="giftHeading">
+                    A little box of happiness
+                </h2>
+
+                <p class="section-description" id="gift-hint" data-i18n="giftHint">
+                    Tap the gift and see what's hiding inside.
+                </p>
+
+                <button class="gift-box" id="gift-box" type="button" aria-label="Open your birthday gift"
+                    aria-expanded="false">
+
+                    <span class="gift-sparkle sparkle-one">✦</span>
+                    <span class="gift-sparkle sparkle-two">✧</span>
+                    <span id="gift-emoji">🎁</span>
+
+                </button>
+
+                <div class="gift-message" id="gift-message" hidden>
+
+                    <h3 data-i18n="giftMessageHeading">
+                        A wish wrapped just for you! ♡
+                    </h3>
+
+                    <p data-i18n="giftMessageText">
+                        May this new chapter bring you peaceful mornings,
+                        brave dreams, genuine smiles and countless reasons
+                        to feel loved.
+                    </p>
+
+                </div>
+
+                <div class="button-row">
+
+                    <button class="secondary-button" data-back type="button">
+                        ← <span data-i18n="back">Back</span>
+                    </button>
+
+                    <button class="primary-button" id="gift-next" type="button">
+                        <span data-i18n="openMemories">Open the memories</span> →
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. Memories -->
+        <section class="birthday-section" id="section-memories" data-section="memories">
+
+            <div class="content-card wide-card">
+
+                <div class="section-icon">📸</div>
+
+                <p class="eyebrow" data-i18n="memoriesEyebrow">
+                    LITTLE MOMENTS, BIG FEELINGS
+                </p>
+
+                <h2 data-i18n="memoriesHeading">
+                    Our memory corner
+                </h2>
+
+                <p class="section-description" data-i18n="memoriesDescription">
+                    Add your favorite photos and make this page feel personal.
+                    Your selected photos stay in this browser session.
+                </p>
+
+                <label class="upload-area" for="memory-photos">
+                    <span class="upload-icon">＋</span>
+
+                    <strong data-i18n="choosePhotos">
+                        Choose your favorite photos
+                    </strong>
+
+                    <span data-i18n="photoTypes">
+                        JPG, PNG or WebP · Select multiple photos
+                    </span>
+                </label>
+
+                <input id="memory-photos" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+
+                <div id="photo-preview" class="photo-grid">
+                    <div class="empty-memory">
+                        <span>🌷</span>
+                        <p data-i18n="emptyMemories">
+                            Your lovely memories will appear here.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="button-row">
+
+                    <button class="secondary-button" data-back type="button">
+                        ← <span data-i18n="back">Back</span>
+                    </button>
+
+                    <button class="primary-button" id="memories-next" type="button">
+                        <span data-i18n="quizNext">A tiny birthday quiz</span> →
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. Quiz -->
+        <section class="birthday-section" id="section-quiz" data-section="quiz">
+
+            <div class="content-card">
+
+                <div class="section-icon">✨</div>
+
+                <p class="eyebrow" data-i18n="quizEyebrow">
+                    JUST FOR FUN
+                </p>
+
+                <h2 data-i18n="quizHeading">
+                    A little birthday quiz
+                </h2>
+
+                <p class="section-description" data-i18n="quizDescription">
+                    No pressure, just a few happy questions.
+                </p>
+
+                <div class="quiz-progress-track">
+                    <div id="quiz-progress" class="quiz-progress"></div>
+                </div>
+
+                <div class="quiz-meta">
+                    <span id="quiz-counter">Question 1</span>
+                    <span id="quiz-score">Score: 0</span>
+                </div>
+
+                <h3 id="quiz-question">
+                    What deserves an extra celebration today?
+                </h3>
+
+                <div id="quiz-options" class="quiz-options"></div>
+
+                <p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p>
+
+                <div class="button-row">
+
+                    <button class="secondary-button" data-back type="button">
+                        ← <span data-i18n="back">Back</span>
+                    </button>
+
+                    <button class="primary-button" id="quiz-next" type="button" disabled>
+                        <span data-i18n="nextQuestion">Next question</span> →
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. Cake -->
+        <section class="birthday-section" id="section-cake" data-section="cake">
+
+            <div class="content-card">
+
+                <div class="section-icon">🕯️</div>
+
+                <p class="eyebrow" data-i18n="cakeEyebrow">
+                    MAKE A LITTLE WISH
+                </p>
+
+                <h2 data-i18n="cakeHeading">
+                    Your birthday cake is ready
+                </h2>
+
+                <p class="section-description" data-i18n="cakeDescription">
+                    Take a breath, make a wish and blow out the candles.
+                </p>
+
+                <div class="cake-scene">
+
+                    <div class="cake-candles" id="candle-row">
+                        <span class="candle"><i class="flame"></i></span>
+                        <span class="candle"><i class="flame"></i></span>
+                        <span class="candle"><i class="flame"></i></span>
+                        <span class="candle"><i class="flame"></i></span>
+                        <span class="candle"><i class="flame"></i></span>
+                    </div>
+
+                    <div class="cake-top"></div>
+                    <div class="cake-middle"></div>
+                    <div class="cake-bottom"></div>
+                    <div class="cake-plate"></div>
+
+                </div>
+
+                <button class="primary-button" id="blow-candles" type="button">
+                    <span data-i18n="blowCandles">Blow out the candles</span> ✨
+                </button>
+
+                <p id="candle-result" class="candle-result" aria-live="polite"></p>
+
+                <div class="button-row">
+
+                    <button class="secondary-button" data-back type="button">
+                        ← <span data-i18n="back">Back</span>
+                    </button>
+
+                    <button class="primary-button" id="cake-next" type="button">
+                        <span data-i18n="lastSurprise">One last surprise</span> →
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. Final surprise -->
+        <section class="birthday-section" id="section-final" data-section="final">
+
+            <div class="content-card final-card">
+
+                <div class="final-sparkles">✦ ✧ ♡ ✧ ✦</div>
+                <div class="section-icon final-icon">💖</div>
+
+                <p class="eyebrow" data-i18n="finalEyebrow">
+                    A FINAL LITTLE WISH
+                </p>
+
+                <h2>
+                    <span data-i18n="happyBirthday">Happy Birthday</span>,
+                    <span id="final-name">Beautiful Soul</span>!
+                </h2>
+
+                <p id="final-message" class="final-message" data-i18n="finalMessage">
+                    May you always find little reasons to smile,
+                    courage to follow your dreams, and people who
+                    make your heart feel at home.
+                </p>
+
+                <div class="final-wish">
+                    <span>♡</span>
+                    <p data-i18n="finalWish">
+                        May your next chapter be your sweetest one yet.
+                    </p>
+                    <span>♡</span>
+                </div>
+
+                <button class="primary-button" id="celebrate-button" type="button">
+                    <span data-i18n="celebrateAgain">Celebrate one more time</span> 🎉
+                </button>
+
+                <div class="button-row final-actions">
+
+                    <button class="secondary-button" id="copy-button" type="button" data-i18n="copyLink">
+                        Copy website link
+                    </button>
+
+                    <button class="secondary-button" id="restart-button" type="button">
+                        <span data-i18n="startAgain">Start again</span> ↻
+                    </button>
+
+                </div>
+
+                <p class="signature">
+                    A little magic, made by <span>its_TIE</span> ♡
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="page-footer">
+        <span data-i18n="footerText">
+            Made with love, a little sparkle and a birthday wish.
+        </span>
+        <span>♡ its_TIE</span>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Optional: add your own royalty-free MP3 at assets/soft-music.mp3 -->
+    <audio id="birthday-music" loop preload="none">
+        <source src="assets/soft-music.mp3" type="audio/mpeg">
+    </audio>
+
+</body>
+
+</html>
